@@ -24,7 +24,8 @@ class ChatBoxView: UIView {
         let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return v
     }()
-    let specialMessageView = UIView()
+    let textField = UITextField()
+    let sendBtn = UIButton()
     let newMsgTipView = UILabel()
     
     init() {
@@ -44,17 +45,44 @@ class ChatBoxView: UIView {
     }
     
     func setup() {
-        self.addSubview(specialMessageView)
-        specialMessageView.backgroundColor = UIColor.black
-        specialMessageView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.height.lessThanOrEqualTo(50)
+        
+        self.addSubview(sendBtn)
+        sendBtn.backgroundColor = UIColor.clear
+        sendBtn.snp.makeConstraints { make in
+            make.trailing.equalTo(-PADDING_OF_CELL_H)
+            make.bottom.equalTo(-PADDING_BETWEEN_CELLS)
+            make.height.equalTo(40)
+            make.width.equalTo(40)
         }
+        sendBtn.layer.cornerRadius = 10
+        sendBtn.layer.masksToBounds = true
+        sendBtn.setTitle("发送", for: .normal)
+        sendBtn.setTitleColor(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), for: .normal)
+        sendBtn.addTarget(self, action: #selector(sendBtnClicked), for: .touchUpInside)
+        
+        self.addSubview(textField)
+        textField.backgroundColor = #colorLiteral(red: 0.8816456199, green: 0.8764049411, blue: 0.8856742382, alpha: 1)
+        textField.snp.makeConstraints { make in
+            make.leading.equalTo(PADDING_OF_CELL_H)
+            make.trailing.equalTo(sendBtn.snp.leading).offset(-5)
+            make.bottom.equalTo(-PADDING_BETWEEN_CELLS)
+            make.height.equalTo(40)
+        }
+        textField.layer.cornerRadius = 10
+        textField.layer.masksToBounds = true
+        textField.text = ""
+        textField.font = UIFont.systemFont(ofSize: TEXT_FONT_SIZE)
+        textField.textAlignment = .left
+        textField.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        textField.isEnabled = true
+        textField.keyboardType = .default
+        textField.returnKeyType = .send
+        textField.delegate = self
 
         self.addSubview(messageView)
-        messageView.backgroundColor = UIColor.white
+        messageView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         messageView.snp.makeConstraints { make in
-            make.bottom.equalTo(specialMessageView.snp.top)
+            make.bottom.equalTo(textField.snp.top).offset(-PADDING_BETWEEN_CELLS)
             make.leading.trailing.top.equalToSuperview()
         }
         // 将整个CollectionView翻转
@@ -115,4 +143,17 @@ class ChatBoxView: UIView {
         newMsgTipView.isHidden = true
     }
     
+    @objc func sendBtnClicked() {
+        if textField.text == "" { return }
+        NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "我", "text": textField.text!])
+        textField.text = ""
+    }
+    
+}
+
+extension ChatBoxView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

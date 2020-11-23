@@ -40,6 +40,7 @@ class MessageCell: UICollectionViewCell {
             make.center.equalToSuperview()
         }
         textLabel.font = UIFont.systemFont(ofSize: TEXT_FONT_SIZE)
+        textLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         textLabel.numberOfLines = 0
     }
     

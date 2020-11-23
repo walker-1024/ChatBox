@@ -7,28 +7,6 @@
 
 import UIKit
 
-struct Message {
-    enum MsgType {
-        case trueMsg
-        case newPeopleCome
-        case systemTip
-    }
-    var type: MsgType
-    var speaker: String?
-    var text: String?
-    
-    func getString() -> String {
-        switch type {
-        case .trueMsg:
-            return (speaker ?? "") + ": " + (text ?? "")
-        case .newPeopleCome:
-            return speaker! + " 来了"
-        case .systemTip:
-            return SYSTEM_TIP_TEXT
-        }
-    }
-}
-
 class ScreenMessageStore: NSObject {
     
     var messages: [Message] = testMsgs

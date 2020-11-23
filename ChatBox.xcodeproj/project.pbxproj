@@ -18,6 +18,10 @@
 		52BF94AB2566622A00B4A235 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF94AA2566622A00B4A235 /* MessageCell.swift */; };
 		52BF94AE256662D400B4A235 /* ScreenMessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF94AD256662D400B4A235 /* ScreenMessageStore.swift */; };
 		52BF94B4256A3D0800B4A235 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF94B3256A3D0800B4A235 /* Config.swift */; };
+		52BF94B9256BA1CB00B4A235 /* MessageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF94B8256BA1CA00B4A235 /* MessageClient.swift */; };
+		52BF94BC256BA7C200B4A235 /* ChatBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF94BB256BA7C200B4A235 /* ChatBot.swift */; };
+		52BF94C0256BABAC00B4A235 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF94BF256BABAC00B4A235 /* MessageModel.swift */; };
+		52BF94C3256BABDE00B4A235 /* MessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF94C2256BABDE00B4A235 /* MessageStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		52BF94AA2566622A00B4A235 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		52BF94AD256662D400B4A235 /* ScreenMessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenMessageStore.swift; sourceTree = "<group>"; };
 		52BF94B3256A3D0800B4A235 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		52BF94B8256BA1CA00B4A235 /* MessageClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageClient.swift; sourceTree = "<group>"; };
+		52BF94BB256BA7C200B4A235 /* ChatBot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBot.swift; sourceTree = "<group>"; };
+		52BF94BF256BABAC00B4A235 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		52BF94C2256BABDE00B4A235 /* MessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,9 +77,13 @@
 				52BF948E2566509100B4A235 /* AppDelegate.swift */,
 				52BF94902566509100B4A235 /* SceneDelegate.swift */,
 				52BF94922566509100B4A235 /* ViewController.swift */,
+				52BF94BF256BABAC00B4A235 /* MessageModel.swift */,
+				52BF94C2256BABDE00B4A235 /* MessageStore.swift */,
+				52BF94B8256BA1CA00B4A235 /* MessageClient.swift */,
 				52BF94A72566524800B4A235 /* ChatBoxView.swift */,
 				52BF94AD256662D400B4A235 /* ScreenMessageStore.swift */,
 				52BF94AA2566622A00B4A235 /* MessageCell.swift */,
+				52BF94BB256BA7C200B4A235 /* ChatBot.swift */,
 				52BF94B3256A3D0800B4A235 /* Config.swift */,
 				52BF94942566509100B4A235 /* Main.storyboard */,
 				52BF94972566509300B4A235 /* Assets.xcassets */,
@@ -159,8 +171,12 @@
 			files = (
 				52BF94A82566524800B4A235 /* ChatBoxView.swift in Sources */,
 				52BF94AB2566622A00B4A235 /* MessageCell.swift in Sources */,
+				52BF94B9256BA1CB00B4A235 /* MessageClient.swift in Sources */,
 				52BF94932566509100B4A235 /* ViewController.swift in Sources */,
 				52BF948F2566509100B4A235 /* AppDelegate.swift in Sources */,
+				52BF94C0256BABAC00B4A235 /* MessageModel.swift in Sources */,
+				52BF94C3256BABDE00B4A235 /* MessageStore.swift in Sources */,
+				52BF94BC256BA7C200B4A235 /* ChatBot.swift in Sources */,
 				52BF94B4256A3D0800B4A235 /* Config.swift in Sources */,
 				52BF94912566509100B4A235 /* SceneDelegate.swift in Sources */,
 				52BF94AE256662D400B4A235 /* ScreenMessageStore.swift in Sources */,
