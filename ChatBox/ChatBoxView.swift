@@ -28,6 +28,8 @@ class ChatBoxView: UIView {
     let sendBtn = UIButton()
     let newMsgTipView = UILabel()
     
+    var tgr: UITapGestureRecognizer!
+    
     init() {
         super.init(frame: .zero)
         self.backgroundColor = UIColor.white
@@ -104,21 +106,20 @@ class ChatBoxView: UIView {
         newMsgTipView.font = UIFont.systemFont(ofSize: TEXT_FONT_SIZE)
         newMsgTipView.isHidden = true
         
-        let gr = UITapGestureRecognizer(target: self, action: #selector(newMsgTipViewClicked))
-        gr.numberOfTapsRequired = 1
-        self.addGestureRecognizer(gr)
+        tgr = UITapGestureRecognizer(target: self, action: #selector(newMsgTipViewClicked))
+        tgr.numberOfTapsRequired = 1
+        tgr.isEnabled = false
+        self.addGestureRecognizer(tgr)
     }
     
-    func addedNewMessage(text: String) {
+    func addedNewMessage(message: Message) {
         let prevOffset = messageView.contentOffset
         messageView.reloadData()
         // 当不在最下面时，保持视图岿然不动
         if prevOffset.y > PADDING_BETWEEN_CELLS + 5.0 {
-            let textSize = CGSize(width: messageView.bounds.width - PADDING_OF_CELL_H * 2 - PADDING_OF_TEXT_H * 2, height: 10000.0)
-            let font = UIFont.systemFont(ofSize: TEXT_FONT_SIZE)
-            let rect = text.boundingRect(with: textSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
             
-            let deltaOffset = ceil(rect.height) + PADDING_OF_TEXT_V * 2 + PADDING_BETWEEN_CELLS
+            let cellHeight = message.getContentHeight(contentWidth: messageView.bounds.width - PADDING_OF_CELL_H * 2)
+            let deltaOffset = ceil(cellHeight) + PADDING_BETWEEN_CELLS
             messageView.contentOffset = CGPoint(x: prevOffset.x, y: prevOffset.y + deltaOffset)
             
             addNewMsgNum()
@@ -131,6 +132,7 @@ class ChatBoxView: UIView {
         newMsgNum += 1
         newMsgTipView.isHidden = false
         newMsgTipView.text = "\(newMsgNum)"
+        tgr.isEnabled = true
     }
     
     func subNewMsgNum() {
@@ -141,6 +143,7 @@ class ChatBoxView: UIView {
         messageView.contentOffset = CGPoint.zero
         newMsgNum = 0
         newMsgTipView.isHidden = true
+        tgr.isEnabled = false
     }
     
     @objc func sendBtnClicked() {

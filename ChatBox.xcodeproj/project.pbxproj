@@ -22,6 +22,7 @@
 		52BF94BC256BA7C200B4A235 /* ChatBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF94BB256BA7C200B4A235 /* ChatBot.swift */; };
 		52BF94C0256BABAC00B4A235 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF94BF256BABAC00B4A235 /* MessageModel.swift */; };
 		52BF94C3256BABDE00B4A235 /* MessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BF94C2256BABDE00B4A235 /* MessageStore.swift */; };
+		52BF94C7256CB7DA00B4A235 /* img.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 52BF94C6256CB7DA00B4A235 /* img.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		52BF94BB256BA7C200B4A235 /* ChatBot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBot.swift; sourceTree = "<group>"; };
 		52BF94BF256BABAC00B4A235 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		52BF94C2256BABDE00B4A235 /* MessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStore.swift; sourceTree = "<group>"; };
+		52BF94C6256CB7DA00B4A235 /* img.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				52BF94AA2566622A00B4A235 /* MessageCell.swift */,
 				52BF94BB256BA7C200B4A235 /* ChatBot.swift */,
 				52BF94B3256A3D0800B4A235 /* Config.swift */,
+				52BF94C6256CB7DA00B4A235 /* img.jpg */,
 				52BF94942566509100B4A235 /* Main.storyboard */,
 				52BF94972566509300B4A235 /* Assets.xcassets */,
 				52BF94992566509300B4A235 /* LaunchScreen.storyboard */,
@@ -157,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52BF949B2566509300B4A235 /* LaunchScreen.storyboard in Resources */,
+				52BF94C7256CB7DA00B4A235 /* img.jpg in Resources */,
 				52BF94982566509300B4A235 /* Assets.xcassets in Resources */,
 				52BF94962566509100B4A235 /* Main.storyboard in Resources */,
 			);

@@ -33,10 +33,8 @@ class ViewController: UIViewController {
         
         store.addedMsg = { message in
             self.screenMessageStore.addNewMessage(msg: message)
-            self.cbv.addedNewMessage(text: message.getString())
+            self.cbv.addedNewMessage(message: message)
         }
-        
-        ceshi()
         
         // 1.0秒后发送系统提示消息
         perform(#selector(sendSystemMsg), with: nil, afterDelay: 1.0)
@@ -46,24 +44,7 @@ class ViewController: UIViewController {
     @objc func sendSystemMsg() {
         let m = Message(type: .systemTip, speaker: nil, text: nil)
         screenMessageStore.addNewMessage(msg: m)
-        cbv.addedNewMessage(text: m.getString())
-    }
-    
-    func ceshi() {
-        let btn = UIButton()
-        view.addSubview(btn)
-        btn.snp.makeConstraints { make in
-            make.trailing.bottom.equalToSuperview()
-            make.size.equalTo(80)
-        }
-        btn.backgroundColor = UIColor.white
-        btn.setTitle("增加", for: .normal)
-        btn.setTitleColor(UIColor.black, for: .normal)
-        btn.addTarget(self, action: #selector(ccc), for: .touchDown)
-    }
-    
-    @objc func ccc() {
-        NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "？？？", "text": "新加消息"])
+        cbv.addedNewMessage(message: m)
     }
 
 

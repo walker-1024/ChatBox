@@ -29,17 +29,15 @@ extension ScreenMessageStore: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! MessageCell
-        cell.setupCell(text: messages[indexPath.row].getString())
+        cell.setupCell(text: messages[indexPath.row].getString(), image: messages[indexPath.row].image)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let str = messages[indexPath.row].getString()
-        let textSize = CGSize(width: collectionView.bounds.width - PADDING_OF_CELL_H * 2 - PADDING_OF_TEXT_H * 2, height: 10000.0)
-        let font = UIFont.systemFont(ofSize: TEXT_FONT_SIZE)
-        let rect = str.boundingRect(with: textSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        let width = collectionView.bounds.width - PADDING_OF_CELL_H * 2
+        let height = messages[indexPath.row].getContentHeight(contentWidth: width)
         
-        return CGSize(width: collectionView.bounds.width - PADDING_OF_CELL_H * 2, height: ceil(rect.height) + PADDING_OF_TEXT_V * 2)
+        return CGSize(width: width, height: height)
     }
 }
