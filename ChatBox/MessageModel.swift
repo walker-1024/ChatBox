@@ -46,8 +46,6 @@ struct Message {
         // 文字区域的大小
         let textRect = str.boundingRect(with: textSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         
-        guard let _ = self.audio else { return ceil(textRect.height) + PADDING_OF_TEXT_V * 2 }
-        
         guard let image = self.image else { return ceil(textRect.height) + PADDING_OF_TEXT_V * 2 }
         // 图片高度
         let imageHeight = image.size.height / image.size.width * width
