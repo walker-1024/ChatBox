@@ -41,4 +41,4 @@ public let PADDING_OF_TEXT_H: CGFloat = 10.0
 // 文字和Cell边框之间的间距（上下）
 public let PADDING_OF_TEXT_V: CGFloat = 8.0
 // 系统提示内容
-public let SYSTEM_TIP_TEXT: String = "购买直播推荐商品时，请确认链接描述与实际商品一致，避免私下转账，以防上当受骗。"
+public let SYSTEM_TIP_TEXT: String = "现有功能：\n发送menhear获得图片；\n发送文字和机器人聊天。"

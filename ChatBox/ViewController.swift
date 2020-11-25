@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1)
         view.addSubview(cbv)
         cbv.snp.makeConstraints { make in
-            make.size.equalTo(CGSize(width: screenWidth * 0.9, height: screenWidth * 1.2))
+            make.size.equalTo(CGSize(width: screenWidth * 0.9, height: screenWidth * 1.5))
             make.center.equalToSuperview()
         }
         cbv.messageView.delegate = screenMessageStore

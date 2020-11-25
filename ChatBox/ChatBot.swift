@@ -37,9 +37,10 @@ class ChatBot: NSObject {
         let request = URLRequest(url: URL(string: urlStr)!)
         let dataTask: URLSessionDataTask = session.dataTask(with: request) { (data, response, error) in
             if error == nil {
-                do {
-                    
-                } catch {
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "机器人", "text": "", "image": image])
+                    }
                 }
             }
         }
