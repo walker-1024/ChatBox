@@ -56,10 +56,10 @@ class MessageCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFit
     }
     
-    func setupCell(text: String?, image: UIImage?) {
-        textLabel.text = text
+    func setupCell(message: Message) {
+        textLabel.text = message.getString()
         textLabel.sizeToFit()
-        imageView.image = image
+        imageView.image = message.image
     }
     
 }

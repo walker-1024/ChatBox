@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 // struct Message: Codable {
 struct Message {
     enum MsgType: String, Codable {
@@ -19,6 +20,7 @@ struct Message {
     var speaker: String?
     var text: String?
     var image: UIImage?
+    var audio: AVAudioPlayer?
     
     func getString() -> String {
         switch type {
@@ -43,6 +45,8 @@ struct Message {
         let font = UIFont.systemFont(ofSize: TEXT_FONT_SIZE)
         // 文字区域的大小
         let textRect = str.boundingRect(with: textSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        
+        guard let _ = self.audio else { return ceil(textRect.height) + PADDING_OF_TEXT_V * 2 }
         
         guard let image = self.image else { return ceil(textRect.height) + PADDING_OF_TEXT_V * 2 }
         // 图片高度

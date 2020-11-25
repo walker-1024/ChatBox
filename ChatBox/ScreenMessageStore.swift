@@ -29,7 +29,7 @@ extension ScreenMessageStore: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MessageCell", for: indexPath) as! MessageCell
-        cell.setupCell(text: messages[indexPath.row].getString(), image: messages[indexPath.row].image)
+        cell.setupCell(message: messages[indexPath.row])
         return cell
     }
     
