@@ -7,8 +7,8 @@
 
 import UIKit
 import AVFoundation
-// struct Message: Codable {
-struct Message {
+
+struct Message: Codable {
     enum MsgType: String, Codable {
         case textMsg
         case picMsg
@@ -19,8 +19,8 @@ struct Message {
     var type: MsgType
     var speaker: String?
     var text: String?
-    var image: UIImage?
-    var audio: AVAudioPlayer?
+    var imageData: Data?
+    var audioData: Data?
     
     func getString() -> String {
         switch type {
@@ -46,7 +46,13 @@ struct Message {
         // 文字区域的大小
         let textRect = str.boundingRect(with: textSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         
-        guard let image = self.image else { return ceil(textRect.height) + PADDING_OF_TEXT_V * 2 }
+        if let _ = self.audioData {
+            return ceil(textRect.height) + AUDIO_ICON_H + PADDING_OF_TEXT_V * 3
+        }
+        
+        guard let data = self.imageData, let image = UIImage(data: data) else {
+            return ceil(textRect.height) + PADDING_OF_TEXT_V * 2
+        }
         // 图片高度
         let imageHeight = image.size.height / image.size.width * width
         

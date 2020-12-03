@@ -9,17 +9,6 @@ import UIKit
 
 let testMsgs = [Message(type: .textMsg, speaker: "小明", text: "初始消息"),
                 Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息", image: UIImage(named: "img.jpg")),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息初始消息初始消息初始消息", image: UIImage(named: "img.jpg")),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息初始消息", image: UIImage(named: "img.jpg")),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息", image: UIImage(named: "img.jpg")),
                 Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息"),
                 Message(type: .textMsg, speaker: "小明", text: "初始消息"),
                 Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息"),
@@ -40,5 +29,7 @@ public let PADDING_BETWEEN_CELLS: CGFloat = 10.0
 public let PADDING_OF_TEXT_H: CGFloat = 10.0
 // 文字和Cell边框之间的间距（上下）
 public let PADDING_OF_TEXT_V: CGFloat = 8.0
+// 语音图标高度
+public let AUDIO_ICON_H: CGFloat = 40
 // 系统提示内容
-public let SYSTEM_TIP_TEXT: String = "现有功能：\n发送menhear获得图片；\n发送文字和机器人聊天。"
+public let SYSTEM_TIP_TEXT: String = "现有功能：\n发送menhear获得图片；\n发送文字和机器人聊天；\n发送\"语音\"获得绕口令。"

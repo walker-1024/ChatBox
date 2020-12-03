@@ -25,17 +25,19 @@ class MessageClient: NSObject {
         let userInfo = notification.userInfo as! [String: Any]
         let speaker = userInfo["speaker"] as! String
         let text = userInfo["text"] as? String
-        let image = userInfo["image"] as? UIImage
-        let audio = userInfo["audio"] as? AVAudioPlayer
+        let imageData = userInfo["imageData"] as? Data
+        let audioData = userInfo["audioData"] as? Data
         
-        print(speaker, text as Any)
+        print(userInfo)
         
-        let m = Message(type: .textMsg, speaker: speaker, text: text, image: image, audio: audio)
+        let m = Message(type: .textMsg, speaker: speaker, text: text, imageData: imageData, audioData: audioData)
         receivedMsg!(m)
         
         if speaker == "我" {
             if text == "menhear" {
                 ChatBot.menhear()
+            } else if text == "语音" {
+                ChatBot.voice()
             } else {
                 ChatBot.chat(text: text!)
             }

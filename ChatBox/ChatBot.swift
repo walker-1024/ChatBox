@@ -8,6 +8,7 @@
 // 模拟一个聊天机器人
 
 import UIKit
+import AVFoundation
 
 class ChatBot: NSObject {
     
@@ -36,15 +37,23 @@ class ChatBot: NSObject {
         let urlStr = "https://api.ixiaowai.cn/mcapi/mcapi.php"
         let request = URLRequest(url: URL(string: urlStr)!)
         let dataTask: URLSessionDataTask = session.dataTask(with: request) { (data, response, error) in
-            if error == nil {
-                if let data = data, let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "机器人", "text": "", "image": image])
-                    }
+            if error == nil, let data = data {
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "机器人", "text": "", "imageData": data])
                 }
             }
         }
         dataTask.resume()
+    }
+    
+    static func voice() {
+        do {
+            if let path = Bundle.main.path(forResource: "example", ofType: "mp3") {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "机器人", "audioData": data])
+            }
+        } catch { }
+        
     }
     
 }

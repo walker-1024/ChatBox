@@ -7,11 +7,15 @@
 
 import UIKit
 import SnapKit
+import AVFoundation
 
 class MessageCell: UICollectionViewCell {
     
+    var audioPlayer: AVAudioPlayer!
+    
     let textLabel = UILabel()
     let imageView = UIImageView()
+    let audioButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,6 +29,14 @@ class MessageCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        audioPlayer = nil
+        textLabel.text = ""
+        imageView.image = nil
+        
     }
     
     func setup() {
@@ -54,12 +66,55 @@ class MessageCell: UICollectionViewCell {
             make.bottom.equalTo(-PADDING_OF_TEXT_V)
         }
         imageView.contentMode = .scaleAspectFit
+        
+        contentView.addSubview(audioButton)
+        audioButton.backgroundColor = .clear
+        let image = UIImage(named: "audio")
+        audioButton.snp.makeConstraints { make in
+            make.leading.equalTo(PADDING_OF_TEXT_H)
+            make.trailing.equalTo(-PADDING_OF_TEXT_H)
+            make.top.equalTo(textLabel.snp.bottom)
+            make.bottom.equalTo(-PADDING_OF_TEXT_V)
+        }
+        audioButton.setImage(image, for: .normal)
+        audioButton.imageView?.contentMode = .scaleAspectFit
+        audioButton.addTarget(self, action: #selector(audioClicked), for: .touchUpInside)
+        
     }
     
     func setupCell(message: Message) {
         textLabel.text = message.getString()
         textLabel.sizeToFit()
-        imageView.image = message.image
+        
+        if let data = message.imageData {
+            imageView.image = UIImage(data: data)
+            imageView.isHidden = false
+        } else {
+            imageView.isHidden = true
+        }
+        
+        if let data = message.audioData {
+            do {
+                try audioPlayer = AVAudioPlayer(data: data)
+                audioButton.isHidden = false
+                audioButton.isEnabled = true
+            } catch { }
+        } else {
+            audioButton.isHidden = true
+            audioButton.isEnabled = false
+        }
+        
+    }
+    
+    @objc func audioClicked() {
+        if audioPlayer.isPlaying {
+            audioPlayer.stop()
+        } else {
+            audioPlayer.prepareToPlay()
+            audioPlayer.volume = 1.0
+            audioPlayer.numberOfLoops = 0
+            audioPlayer.play()
+        }
     }
     
 }
