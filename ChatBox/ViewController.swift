@@ -45,6 +45,10 @@ class ViewController: UIViewController {
         let m = Message(type: .systemTip, speaker: nil, text: nil)
         screenMessageStore.addNewMessage(msg: m)
         cbv.addedNewMessage(message: m)
+        
+        let t = Message(type: .videoMsg, speaker: nil, text: nil, videoUrl: URL(string: "http://qkt3l2hz4.hn-bkt.clouddn.com/ces.mp4")!)
+        screenMessageStore.addNewMessage(msg: t)
+        cbv.addedNewMessage(message: t)
     }
 
 

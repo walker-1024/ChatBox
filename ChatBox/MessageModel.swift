@@ -13,6 +13,7 @@ struct Message: Codable {
         case textMsg
         case picMsg
         case audioMsg
+        case videoMsg
         case newPeopleCome
         case systemTip
     }
@@ -21,6 +22,7 @@ struct Message: Codable {
     var text: String?
     var imageData: Data?
     var audioData: Data?
+    var videoUrl: URL?
     
     func getString() -> String {
         switch type {
@@ -29,6 +31,8 @@ struct Message: Codable {
         case .picMsg:
             return (speaker ?? "") + ": "
         case .audioMsg:
+            return (speaker ?? "") + ": "
+        case .videoMsg:
             return (speaker ?? "") + ": "
         case .newPeopleCome:
             return speaker! + " 来了"
@@ -47,15 +51,23 @@ struct Message: Codable {
         let textRect = str.boundingRect(with: textSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         
         if let _ = self.audioData {
+            // 返回语音消息的高度
             return ceil(textRect.height) + AUDIO_ICON_H + PADDING_OF_TEXT_V * 3
         }
         
+        if let _ = self.videoUrl {
+            // 返回视频消息的高度
+            return ceil(textRect.height) + VIDEO_AREA_H + PADDING_OF_TEXT_V * 3
+        }
+        
         guard let data = self.imageData, let image = UIImage(data: data) else {
+            // 返回只有文字的高度
             return ceil(textRect.height) + PADDING_OF_TEXT_V * 2
         }
-        // 图片高度
-        let imageHeight = image.size.height / image.size.width * width
         
+        // 图片高度
+        let imageHeight = width * image.size.height / image.size.width
+        // 返回图片消息的高度
         return ceil(textRect.height + imageHeight) + PADDING_OF_TEXT_V * 3
     }
     

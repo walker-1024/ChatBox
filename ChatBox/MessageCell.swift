@@ -12,10 +12,13 @@ import AVFoundation
 class MessageCell: UICollectionViewCell {
     
     var audioPlayer: AVAudioPlayer!
+    var videoPlayer: AVPlayer!
+    var videoPlayerLayer = AVPlayerLayer()
     
     let textLabel = UILabel()
     let imageView = UIImageView()
     let audioButton = UIButton()
+    let container = UIView() // 用于承载视频
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,17 +72,25 @@ class MessageCell: UICollectionViewCell {
         
         contentView.addSubview(audioButton)
         audioButton.backgroundColor = .clear
-        let image = UIImage(named: "audio")
         audioButton.snp.makeConstraints { make in
             make.leading.equalTo(PADDING_OF_TEXT_H)
             make.trailing.equalTo(-PADDING_OF_TEXT_H)
             make.top.equalTo(textLabel.snp.bottom)
             make.bottom.equalTo(-PADDING_OF_TEXT_V)
         }
-        audioButton.setImage(image, for: .normal)
+        audioButton.setImage(UIImage(named: "audio"), for: .normal)
         audioButton.imageView?.contentMode = .scaleAspectFit
         audioButton.addTarget(self, action: #selector(audioClicked), for: .touchUpInside)
         
+        contentView.addSubview(container)
+        container.backgroundColor = .clear
+        container.snp.makeConstraints { make in
+            make.leading.equalTo(PADDING_OF_TEXT_H)
+            make.trailing.equalTo(-PADDING_OF_TEXT_H)
+            make.top.equalTo(textLabel.snp.bottom)
+            make.bottom.equalTo(-PADDING_OF_TEXT_V)
+        }
+        container.layer.addSublayer(videoPlayerLayer)
     }
     
     func setupCell(message: Message) {
@@ -104,6 +115,17 @@ class MessageCell: UICollectionViewCell {
             audioButton.isEnabled = false
         }
         
+        if let url = message.videoUrl {
+            DispatchQueue.main.async {
+                self.videoPlayerLayer.frame = self.container.bounds
+            }
+            videoPlayer = AVPlayer(url: url)
+            videoPlayerLayer.player = videoPlayer
+            videoPlayerLayer.isHidden = false
+            videoPlayer.play()
+        } else {
+            videoPlayerLayer.isHidden = true
+        }
     }
     
     @objc func audioClicked() {
