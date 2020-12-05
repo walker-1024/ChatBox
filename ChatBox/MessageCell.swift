@@ -20,6 +20,8 @@ class MessageCell: UICollectionViewCell {
     let audioButton = UIButton()
     let container = UIView() // 用于承载视频
     
+    var isVideoPlaying: Bool = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -91,6 +93,7 @@ class MessageCell: UICollectionViewCell {
             make.bottom.equalTo(-PADDING_OF_TEXT_V)
         }
         container.layer.addSublayer(videoPlayerLayer)
+        container.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(videoClicked(sender:))))
     }
     
     func setupCell(message: Message) {
@@ -121,10 +124,9 @@ class MessageCell: UICollectionViewCell {
             }
             videoPlayer = AVPlayer(url: url)
             videoPlayerLayer.player = videoPlayer
-            videoPlayerLayer.isHidden = false
-            videoPlayer.play()
+            container.isHidden = false
         } else {
-            videoPlayerLayer.isHidden = true
+            container.isHidden = true
         }
     }
     
@@ -136,6 +138,16 @@ class MessageCell: UICollectionViewCell {
             audioPlayer.volume = 1.0
             audioPlayer.numberOfLoops = 0
             audioPlayer.play()
+        }
+    }
+    
+    @objc func videoClicked(sender: UITapGestureRecognizer) {
+        if isVideoPlaying {
+            videoPlayer.pause()
+            isVideoPlaying = false
+        } else {
+            videoPlayer.play()
+            isVideoPlaying = true
         }
     }
     
