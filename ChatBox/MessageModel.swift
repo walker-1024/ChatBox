@@ -28,6 +28,13 @@ struct Message: Codable {
         
         let font = UIFont.systemFont(ofSize: TEXT_FONT_SIZE)
         let nsmat = NSMutableAttributedString()
+        // 添加头衔图片
+        let rankImage = UIImage(named: "rank.png")
+        let rta = NSTextAttachment(image: rankImage!)
+        rta.bounds = CGRect(x: 0, y: -TEXT_FONT_SIZE / 7, width: TEXT_FONT_SIZE, height: TEXT_FONT_SIZE)
+        let rank = NSAttributedString(attachment: rta)
+        nsmat.append(rank)
+        nsmat.addAttributes([.foregroundColor: UIColor.red], range: NSRange(location: 0, length: 1))
         
         switch type {
         case .textMsg:
