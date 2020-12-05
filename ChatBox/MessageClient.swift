@@ -35,10 +35,12 @@ class MessageClient: NSObject {
         receivedMsg!(m)
         
         if speaker == "我" {
-            if text == "menhear" {
+            if text == "menhera" {
                 ChatBot.menhear()
             } else if text == "语音" {
                 ChatBot.voice()
+            } else if text == "视频" {
+                ChatBot.video()
             } else {
                 ChatBot.chat(text: text!)
             }

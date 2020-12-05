@@ -45,9 +45,6 @@ class ViewController: UIViewController {
         let m = Message(type: .systemTip, speaker: "")
         screenMessageStore.addNewMessage(msg: m)
         cbv.addedNewMessage(message: m)
-        
-        ChatBot.video()
-        
     }
 
 
