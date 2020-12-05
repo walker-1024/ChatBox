@@ -18,37 +18,52 @@ struct Message: Codable {
         case systemTip
     }
     var type: MsgType
-    var speaker: String?
+    var speaker: String
     var text: String?
     var imageData: Data?
     var audioData: Data?
     var videoUrl: URL?
     
-    func getString() -> String {
+    func getAttributedText() -> NSMutableAttributedString {
+        
+        let font = UIFont.systemFont(ofSize: TEXT_FONT_SIZE)
+        let nsmat = NSMutableAttributedString()
+        
         switch type {
         case .textMsg:
-            return (speaker ?? "") + ": " + (text ?? "")
+            let name = NSAttributedString(string: speaker + ": ", attributes: [.font: font, .foregroundColor: UIColor.blue])
+            let text = NSAttributedString(string: self.text ?? "", attributes: [.font: font, .foregroundColor: UIColor.black])
+            nsmat.append(name)
+            nsmat.append(text)
         case .picMsg:
-            return (speaker ?? "") + ": "
+            let name = NSAttributedString(string: speaker + ": ", attributes: [.font: font, .foregroundColor: UIColor.blue])
+            nsmat.append(name)
         case .audioMsg:
-            return (speaker ?? "") + ": "
+            let name = NSAttributedString(string: speaker + ": ", attributes: [.font: font, .foregroundColor: UIColor.blue])
+            nsmat.append(name)
         case .videoMsg:
-            return (speaker ?? "") + ": "
+            let name = NSAttributedString(string: speaker + ": ", attributes: [.font: font, .foregroundColor: UIColor.blue])
+            nsmat.append(name)
         case .newPeopleCome:
-            return speaker! + " 来了"
+            let name = NSAttributedString(string: speaker, attributes: [.font: font, .foregroundColor: UIColor.blue])
+            let come = NSAttributedString(string: " 来了", attributes: [.font: font, .foregroundColor: UIColor.gray])
+            nsmat.append(name)
+            nsmat.append(come)
         case .systemTip:
-            return SYSTEM_TIP_TEXT
+            let tip = NSAttributedString(string: SYSTEM_TIP_TEXT, attributes: [.font: font, .foregroundColor: UIColor.blue])
+            nsmat.append(tip)
         }
+        
+        return nsmat
     }
     
     func getContentHeight(contentWidth: CGFloat) -> CGFloat {
         
         let width = contentWidth - PADDING_OF_TEXT_H * 2
-        let str = self.getString()
         let textSize = CGSize(width: width, height: 10000.0)
-        let font = UIFont.systemFont(ofSize: TEXT_FONT_SIZE)
+        let t = self.getAttributedText()
         // 文字区域的大小
-        let textRect = str.boundingRect(with: textSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        let textRect = t.boundingRect(with: textSize, options: .usesLineFragmentOrigin, context: nil)
         
         if let _ = self.audioData {
             // 返回语音消息的高度

@@ -27,10 +27,11 @@ class MessageClient: NSObject {
         let text = userInfo["text"] as? String
         let imageData = userInfo["imageData"] as? Data
         let audioData = userInfo["audioData"] as? Data
+        let videoUrl = userInfo["videoUrl"] as? URL
         
         print(userInfo)
         
-        let m = Message(type: .textMsg, speaker: speaker, text: text, imageData: imageData, audioData: audioData)
+        let m = Message(type: .textMsg, speaker: speaker, text: text, imageData: imageData, audioData: audioData, videoUrl: videoUrl)
         receivedMsg!(m)
         
         if speaker == "我" {

@@ -39,7 +39,7 @@ class MessageCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         audioPlayer = nil
-        textLabel.text = ""
+        textLabel.attributedText = nil
         imageView.image = nil
         
     }
@@ -58,8 +58,6 @@ class MessageCell: UICollectionViewCell {
             make.trailing.equalTo(-PADDING_OF_TEXT_H)
             make.top.equalTo(PADDING_OF_TEXT_V)
         }
-        textLabel.font = UIFont.systemFont(ofSize: TEXT_FONT_SIZE)
-        textLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         textLabel.numberOfLines = 0
         
         contentView.addSubview(imageView)
@@ -97,7 +95,7 @@ class MessageCell: UICollectionViewCell {
     }
     
     func setupCell(message: Message) {
-        textLabel.text = message.getString()
+        textLabel.attributedText = message.getAttributedText()
         textLabel.sizeToFit()
         
         if let data = message.imageData {

@@ -53,7 +53,10 @@ class ChatBot: NSObject {
                 NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "机器人", "audioData": data])
             }
         } catch { }
-        
+    }
+    
+    static func video() {
+        NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "机器人", "videoUrl": URL(string: "http://qkt3l2hz4.hn-bkt.clouddn.com/ces.mp4")!])
     }
     
 }
