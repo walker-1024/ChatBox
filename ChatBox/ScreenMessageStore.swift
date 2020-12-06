@@ -11,14 +11,8 @@ class ScreenMessageStore: NSObject {
     
     var messages: [Message] = originMsgs
     
-    var requestPrevMsg: (() -> Void)?
-    var requestNextMsg: (() -> Void)?
-    
     func addNewMessage(msg: Message) {
         messages.insert(msg, at: 0)
-        if messages.count > 100 {
-            messages.removeLast()
-        }
     }
     
 }
@@ -48,11 +42,4 @@ extension ScreenMessageStore: UICollectionViewDelegate, UICollectionViewDataSour
         return CGSize(width: width, height: height)
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row > 90 {
-            requestPrevMsg!()
-        } else if indexPath.row < 1 {
-            requestNextMsg!()
-        }
-    }
 }
