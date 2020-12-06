@@ -7,16 +7,17 @@
 
 import UIKit
 
-let testMsgs = [Message(type: .textMsg, speaker: "小明", text: "初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息初始消息"),
-                Message(type: .textMsg, speaker: "小明", text: "初始消息"),
+let originMsgs = [
+    Message(type: .textMsg, speaker: "小明", text: "初始消息"),
+    Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息初始消息"),
+    Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息"),
+    Message(type: .textMsg, speaker: "小明", text: "初始消息"),
+    Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息"),
+    Message(type: .textMsg, speaker: "小明", text: "初始消息"),
+    Message(type: .textMsg, speaker: "小明", text: "初始消息"),
+    Message(type: .textMsg, speaker: "小明", text: "初始消息"),
+    Message(type: .textMsg, speaker: "小明", text: "初始消息初始消息初始消息"),
+    Message(type: .textMsg, speaker: "小明", text: "初始消息"),
 ]
 
 // 字体大小
