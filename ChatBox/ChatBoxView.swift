@@ -148,7 +148,7 @@ class ChatBoxView: UIView {
     
     @objc func sendBtnClicked() {
         if textField.text == "" { return }
-        NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "我", "text": textField.text!])
+        NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["type": MsgType.textMsg, "speaker": "我", "text": textField.text!])
         textField.text = ""
     }
     

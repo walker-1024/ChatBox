@@ -8,15 +8,16 @@
 import UIKit
 import AVFoundation
 
+enum MsgType: String, Codable {
+    case textMsg
+    case picMsg
+    case audioMsg
+    case videoMsg
+    case newPeopleCome
+    case systemTip
+}
+
 struct Message: Codable {
-    enum MsgType: String, Codable {
-        case textMsg
-        case picMsg
-        case audioMsg
-        case videoMsg
-        case newPeopleCome
-        case systemTip
-    }
     var type: MsgType
     var speaker: String
     var text: String?

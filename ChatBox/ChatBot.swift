@@ -24,7 +24,7 @@ class ChatBot: NSObject {
                     let dict = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.init(rawValue: 0)) as? [String: Any]
                     let content = dict?["content"] as! String
                     DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "机器人", "text": content])
+                        NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["type": MsgType.textMsg, "speaker": "机器人", "text": content])
                     }
                 } catch {
                 }
@@ -39,7 +39,7 @@ class ChatBot: NSObject {
         let dataTask: URLSessionDataTask = session.dataTask(with: request) { (data, response, error) in
             if error == nil, let data = data {
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "机器人", "text": "", "imageData": data])
+                    NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["type": MsgType.picMsg, "speaker": "机器人", "text": "", "imageData": data])
                 }
             }
         }
@@ -50,13 +50,13 @@ class ChatBot: NSObject {
         do {
             if let path = Bundle.main.path(forResource: "example", ofType: "mp3") {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "机器人", "audioData": data])
+                NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["type": MsgType.audioMsg, "speaker": "机器人", "audioData": data])
             }
         } catch { }
     }
     
     static func video() {
-        NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["speaker": "机器人", "videoUrl": URL(string: "http://qkt3l2hz4.hn-bkt.clouddn.com/ces.mp4")!])
+        NotificationCenter.default.post(name: Notification.Name("sendMessage"), object: self, userInfo: ["type": MsgType.videoMsg, "speaker": "机器人", "videoUrl": URL(string: "http://qkt3l2hz4.hn-bkt.clouddn.com/ces.mp4")!])
     }
     
 }

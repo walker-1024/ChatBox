@@ -23,6 +23,7 @@ class MessageClient: NSObject {
     
     @objc func receiveMessage(notification: Notification) {
         let userInfo = notification.userInfo as! [String: Any]
+        let type = userInfo["type"] as! MsgType
         let speaker = userInfo["speaker"] as! String
         let text = userInfo["text"] as? String
         let imageData = userInfo["imageData"] as? Data
@@ -31,7 +32,7 @@ class MessageClient: NSObject {
         
         print(userInfo)
         
-        let m = Message(type: .textMsg, speaker: speaker, text: text, imageData: imageData, audioData: audioData, videoUrl: videoUrl)
+        let m = Message(type: type, speaker: speaker, text: text, imageData: imageData, audioData: audioData, videoUrl: videoUrl)
         receivedMsg!(m)
         
         if speaker == "我" {
