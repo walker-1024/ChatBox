@@ -39,9 +39,11 @@ class MessageCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         audioPlayer = nil
+        videoPlayer = nil
+        videoPlayerLayer.player = nil
         textLabel.attributedText = nil
         imageView.image = nil
-        
+        isVideoPlaying = false
     }
     
     func setup() {
